@@ -20,7 +20,14 @@ export class Name {
 
     /** Expects that all Name components are properly masked */
     constructor(other: string[], delimiter?: string) {
-        throw new Error("needs implementation or deletion");
+        /** Catch wrong inputs */
+        if (!Array.isArray(other)) {
+            throw new TypeError("You can only enter string Arrays");
+        }
+
+        this.delimiter = delimiter ?? DEFAULT_DELIMITER;
+
+        this.components = [...other];
     }
 
     /**
@@ -29,7 +36,7 @@ export class Name {
      * Users can vary the delimiter character to be used
      */
     public asString(delimiter: string = this.delimiter): string {
-        throw new Error("needs implementation or deletion");
+        return this.components.join(delimiter);
     }
 
     /** 
@@ -42,31 +49,60 @@ export class Name {
     }
 
     public getComponent(i: number): string {
-        throw new Error("needs implementation or deletion");
+
+        if (i < 0 || i >= this.components.length) {
+            throw new RangeError(`Index out of bounds`);
+        }
+        return this.components[i];
     }
 
     /** Expects that new Name component c is properly masked */
     public setComponent(i: number, c: string): void {
-        throw new Error("needs implementation or deletion");
+
+        if (i < 0 || i >= this.components.length) {
+            throw new RangeError(`Index out of bounds`);
+        }
+
+        if (typeof c !== "string") {
+            throw new TypeError("Component must be a string");
+        }
+
+        this.components[i] = c;
     }
 
      /** Returns number of components in Name instance */
      public getNoComponents(): number {
-        throw new Error("needs implementation or deletion");
+        return this.components.length;
     }
 
     /** Expects that new Name component c is properly masked */
     public insert(i: number, c: string): void {
-        throw new Error("needs implementation or deletion");
+        if (i < 0 || i >= this.components.length) {
+            throw new RangeError(`Index out of bounds`);
+        }
+
+        if (typeof c !== "string") {
+            throw new TypeError("Component must be a string");
+        }
+
+        this.components.splice(i, 0, c);
     }
 
     /** Expects that new Name component c is properly masked */
     public append(c: string): void {
-        throw new Error("needs implementation or deletion");
+        if (typeof c !== "string") {
+        throw new TypeError("Component must be a string");
+        }
+
+        this.components.push(c);
     }
 
     public remove(i: number): void {
-        throw new Error("needs implementation or deletion");
+        if (i < 0 || i >= this.components.length) {
+        throw new RangeError(`Index out of bounds`);
+        }
+
+        this.components.splice(i, 1);
     }
 
 }
