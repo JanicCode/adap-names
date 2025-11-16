@@ -24,9 +24,9 @@ export class Name {
         if (!Array.isArray(other)) {
             throw new TypeError("You can only enter string Arrays");
         }
-
+        /* Set delimiter character */
         this.delimiter = delimiter ?? DEFAULT_DELIMITER;
-
+        /* Copy components */
         this.components = [...other];
     }
 
