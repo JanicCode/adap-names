@@ -20,7 +20,9 @@ export abstract class Exception extends Error {
     }
 
     public getTrigger(): Exception {
-        // @todo check if trigger is null
+        if (this.trigger == null) {
+            throw new Error("No trigger exception present");
+        }
         return this.trigger as Exception;
     }
 
